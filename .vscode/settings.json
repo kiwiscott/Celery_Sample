@@ -1,0 +1,15 @@
+{
+    "python.pythonPath": "C:\\Users\\scott\\Documents\\code\\envs\\p36\\Scripts\\Python",
+    "python.autoComplete.extraPaths": [
+        "C:\\Users\\scott\\Documents\\code\\envs\\p36\\Lib\\site-packages"
+    ],
+    "python.devOptions": [
+        "DEBUG"
+    ],
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "autopep8",
+    "python.unitTest.unittestEnabled": true,
+    "python.unitTest.pyTestEnabled": true,
+    "python.unitTest.nosetestsEnabled": false
+}
