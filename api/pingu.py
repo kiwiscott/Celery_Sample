@@ -1,6 +1,7 @@
 import hug
 from celery import signature, group
-from celery_config import app ##init app 
+from celery_config import app  # init app
+
 
 @hug.get()
 def hello(times: int):
@@ -9,6 +10,7 @@ def hello(times: int):
     job = group(steps)
     res = job()
     return res.get()
+
 
 @hug.get()
 def hellox(times: int):
@@ -20,14 +22,20 @@ def hellox(times: int):
 
 
 def build_group_queue_name(times: int):
-    """demonstrates routing via the queue directly"""
+    """
+        emonstrates routing via the queue directly - the signature
+        declares that queue
+    """
     for x in range(times):
         queue = 'atask' if x % 2 else 'btask'
         yield signature('tasks.ping', args=(str(x),), queue=queue)
 
 
 def build_group(times: int):
-    """demonstrates routing via the name of the task directly"""
+    """
+    demonstrates routing via the name of the task directly. The 
+    router determines the queue based on the task name
+    """
     for x in range(times):
         name = 'atask.tasks.ping' if x % 2 else 'btask.tasks.ping'
         yield signature(name, args=(str(x),))
