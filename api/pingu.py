@@ -10,8 +10,24 @@ def hello(times: int):
     res = job()
     return res.get()
 
+@hug.get()
+def hellox(times: int):
+    """PING"""
+    steps = list(build_group_queue_name(times))
+    job = group(steps)
+    res = job()
+    return res.get()
+
+
+def build_group_queue_name(times: int):
+    """demonstrates routing via the queue directly"""
+    for x in range(times):
+        queue = 'atask' if x % 2 else 'btask'
+        yield signature('tasks.ping', args=(str(x),), queue=queue)
+
 
 def build_group(times: int):
+    """demonstrates routing via the name of the task directly"""
     for x in range(times):
         name = 'atask.tasks.ping' if x % 2 else 'btask.tasks.ping'
         yield signature(name, args=(str(x),))
