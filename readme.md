@@ -16,6 +16,8 @@ curl http://localhost:8000/hello?times=1064
 
 
 #start two celery workers with different queue names 
+
+##The folowing two lines are the important ones. When the workers start they are listening only to the specofoc 
 celery -A celery_config worker -l info -Q atask
 celery -A celery_config worker -l info -Q btask
 
